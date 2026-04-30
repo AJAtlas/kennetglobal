@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kennet Global | Insight. Strategy. Influence.</title>
+  <link rel="icon" type="x-icon" href="/favicon.ico">
+  <link rel="icon" type="png" href="/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0B1E3F;
+      --navy-dark: #071529;
+      --gold: #CFAE67;
+      --gold-dim: #9c844d;
+      --off-white: #F7F6F2;
+      --text: #2a2a2a;
+    }
+
+    * { -webkit-font-smoothing: antialiased; }
+    body { font-family: 'Montserrat', sans-serif; background: #fff; color: var(--text); }
+    .serif { font-family: 'Libre Baskerville', serif; }
+    h1, h2, h3, h4 { font-family: 'Libre Baskerville', serif; }
+
+    /* Colours */
+    .bg-navy   { background-color: var(--navy); }
+    .bg-navy-d { background-color: var(--navy-dark); }
+    .text-navy  { color: var(--navy); }
+    .text-gold  { color: var(--gold); }
+    .border-gold { border-color: var(--gold); }
+    .bg-gold   { background-color: var(--gold); }
+
+    /* Button */
+    .btn-gold { background: var(--gold); color: var(--navy); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: .7rem; transition: background .25s, color .25s; }
+    .btn-gold:hover { background: var(--gold-dim); color: #fff; }
+    .btn-outline { border: 1.5px solid var(--navy); color: var(--navy); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; font-size: .7rem; transition: all .25s; }
+    .btn-outline:hover { background: var(--navy); color: #fff; }
+    .btn-navy { border: 1.5px solid var(--navy); color: var(--navy); font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; transition: all .2s; }
+    .btn-navy:hover { background: var(--navy); color: #fff; }
+
+    /* Nav */
+    [x-cloak] { display: none !important; }
+
+    /* Hero grid lines - subtle navy */
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(11,30,63,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(11,30,63,.045) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .6s ease both; }
+    .fade-up-2 { animation: fadeUp .6s .15s ease both; }
+    .fade-up-3 { animation: fadeUp .6s .3s ease both; }
+
+    /* Card */
+    .card { background: #fff; border: 1px solid #e3e0d8; transition: box-shadow .25s, transform .2s; }
+    .card:hover { box-shadow: 0 8px 28px rgba(11,30,63,.09); transform: translateY(-2px); }
+
+    /* Divider accent */
+    .accent-bar { display: block; width: 36px; height: 3px; background: var(--gold); margin-bottom: 1.2rem; }
+
+    /* Section label */
+    .section-label { font-family: 'Montserrat', sans-serif; font-size: .65rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); }
+
+    /* Form inputs */
+    .field { width: 100%; border: none; border-bottom: 1.5px solid #d0cdc6; background: transparent; padding: .6rem .25rem; font-size: .85rem; outline: none; font-family: 'Montserrat', sans-serif; transition: border-color .2s; }
+    .field:focus { border-color: var(--gold); }
+
+    /* Sticky nav */
+    nav { position: sticky; top: 0; z-index: 50; }
+
+    /* Tech tag */
+    .tech-tag { display: inline-block; padding: .2rem .65rem; font-size: .6rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; border: 1px solid rgba(11,30,63,.2); color: var(--navy); }
+
+    /* Timeline dot */
+    .tl-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+  </style>
+</head>
+
+<body x-data="{ page: 'home', mobileMenu: false }">
+
+<!-- ─────────── NAV ─────────── -->
+<nav class="bg-white border-b border-[#e3e0d8] shadow-sm">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="flex justify-between h-[68px] items-center">
+
+      <!-- Logo -->
+      <button @click="page = 'home'; mobileMenu = false" class="flex items-center space-x-3 group">
+        <div class="w-9 h-9 border border-navy flex items-center justify-center text-navy font-bold serif text-lg group-hover:bg-navy group-hover:text-white transition-all duration-200">K</div>
+        <div class="text-left">
+          <p class="text-navy text-[.85rem] font-semibold tracking-wider uppercase leading-none">Kennet Global</p>
+          <p class="text-gold text-[.58rem] tracking-[.22em] uppercase mt-[2px]">Emerging Technology Intelligence</p>
+        </div>
+      </button>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center space-x-7 text-[.7rem] font-medium uppercase tracking-[.15em]">
+        <button @click="page = 'home'"     :class="page==='home'     ? 'text-gold' : 'text-navy/50 hover:text-navy'" class="transition-colors">Home</button>
+        <button @click="page = 'Weekly Brief'" :class="page==='Weekly Brief' ? 'text-gold' : 'text-navy/50 hover:text-navy'" class="transition-colors">Weekly Brief</button>
+        <button @click="page = 'advisory'" :class="page==='advisory' ? 'text-gold' : 'text-navy/50 hover:text-navy'" class="transition-colors">Advisory Services</button>
+        <button @click="page = 'media'"    :class="page==='media'    ? 'text-gold' : 'text-navy/50 hover:text-navy'" class="transition-colors">Media</button>
+        <button @click="page = 'contact'"  class="btn-gold px-5 py-2 ml-2">Contact</button>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button @click="mobileMenu = !mobileMenu" class="md:hidden text-navy p-1">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path x-show="!mobileMenu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          <path x-show="mobileMenu"  stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div x-show="mobileMenu" x-cloak class="md:hidden bg-white border-t border-[#e3e0d8] px-5 pb-6 pt-2 space-y-1">
+    <button @click="page='home';     mobileMenu=false" class="block w-full text-left py-2.5 text-sm text-navy/60 hover:text-navy">Home</button>
+    <button @click="page='Weekly Brief'; mobileMenu=false" class="block w-full text-left py-2.5 text-sm text-navy/60 hover:text-navy">Weekly Brief</button>
+    <button @click="page='advisory'; mobileMenu=false" class="block w-full text-left py-2.5 text-sm text-navy/60 hover:text-navy">Advisory Services</button>
+    <button @click="page='media';    mobileMenu=false" class="block w-full text-left py-2.5 text-sm text-navy/60 hover:text-navy">Media</button>
+    <button @click="page='contact';  mobileMenu=false" class="block w-full text-left py-2.5 text-sm text-gold font-semibold">Contact →</button>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════════════ -->
+<div x-show="page === 'home'" x-cloak>
+
+  <!-- Hero -->
+<section class="relative bg-white hero-grid overflow-hidden border-b border-[#e3e0d8]">
+    <div class="absolute -right-32 top-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-navy/8 rounded-full pointer-events-none"></div>
+    <div class="absolute -right-20 top-1/2 -translate-y-1/2 w-[420px] h-[420px] border border-gold/20 rounded-full pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-5 sm:px-8 py-36 md:py-44" style="
+    padding-top: 124px;padding-bottom: 156px;">
+      
+      <div class="hidden lg:block absolute right-0 top-[265px] md:top-[190px] w-[380px] z-20 fade-up-3 lg:translate-x-20 xl:translate-x-44">
+        <img src="pexels-zelch-30596313.jpg" alt="Kennet Global Intelligence" class="w-full h-auto">
+      </div>
+
+      <p class="section-label fade-up mb-5">Kennet Global</p>
+      <h1 class="text-navy text-4xl sm:text-5xl md:text-[3.6rem] leading-[1.12] fade-up-2 max-w-3xl">
+        Insight. Strategy.<br><span class="text-gold italic">Influence.</span>
+      </h1>
+      <p class="text-navy/55 mt-6 max-w-xl text-[.93rem] leading-relaxed fade-up-3 font-light">
+        Understand the trends. Act early on what matters. Kennet Global delivers concise, decision-focused intelligence on emerging technology for founders, investors, and operators.
+      </p>
+      <div class="flex flex-wrap gap-4 mt-10 fade-up-3">
+        <button @click="page='Weekly Brief'" class="btn-gold px-8 py-3">Our Weekly Brief</button>
+        <button @click="page='advisory'" class="btn-outline px-8 py-3">Advisory Services</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech focus banner -->
+  <div class="bg-[#f0ede6] border-y border-[#e0dbd0]">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-5 flex flex-wrap gap-6 items-center">
+      <p class="text-[.65rem] font-semibold uppercase tracking-[.22em] text-navy/50">Focus Areas</p>
+      <div class="flex flex-wrap gap-3">
+        <span class="tech-tag">Artificial Intelligence</span>
+        <span class="tech-tag">Biotechnology</span>
+        <span class="tech-tag">Defence Tech</span>
+        <span class="tech-tag">Frontier Sectors</span>
+        <span class="tech-tag">Foreign Policy Analysis</span>
+        <span class="tech-tag">Emerging Technology</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Insights -->
+  <!-- About on home -->
+  <section class="max-w-5xl mx-auto px-5 sm:px-8 py-20">
+    <p class="section-label mb-4">Who We Are</p>
+    <h2 class="text-4xl text-navy mb-4 max-w-2xl">Your guide to the fast-moving world of emerging technology.</h2>
+    <p class="text-[1.05rem] text-gray-500 font-light italic max-w-2xl mb-10 leading-relaxed">We translate the shifts that matter into actionable intelligence.</p>
+
+    <div class="grid md:grid-cols-2 gap-12 mb-16">
+      <p class="text-gray-600 leading-relaxed text-[.92rem]">
+        Kennet Global cuts through the noise of emerging technology. We track what's shifting across AI, defence tech, and frontier sectors — and tell you exactly what it means for your business. Our weekly brief gives founders, investors, and operators the intelligence they need to move first, not second.
+      </p>
+      <p class="text-gray-600 leading-relaxed text-[.92rem]">
+        For organisations facing decisions that require deeper analysis, our advisory service goes further. We work with clients to deliver custom research, deep-dives, and strategic guidance — bringing the same rigour as our intelligence work directly to bear on your most pressing questions.
+      </p>
+    </div>
+
+    
+    </div>
+  </section>
+</div><!-- /home -->
+
+<!-- ══════════════════════════════════════════════
+     PAGE: Weekly Brief
+══════════════════════════════════════════════ -->
+<div x-show="page === 'Weekly Brief'" x-cloak class="max-w-7xl mx-auto px-5 sm:px-8 py-20">
+
+  <div class="flex flex-col sm:flex-row justify-between sm:items-end mb-12 gap-4">
+    <div>
+      <p class="section-label mb-3">Weekly Brief</p>
+      <h2 class="text-3xl text-navy">The Weekly Brief</h2>
+    </div>
+  </div>
+
+  <!-- Forthcoming notice -->
+  <div class="bg-[#f0ede6] border border-[#e0dbd0] p-8 mb-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+    <div>
+      <p class="text-navy font-semibold serif text-lg mb-1">First briefs launching soon</p>
+      <p class="text-gray-500 text-[.85rem] leading-relaxed max-w-xl">Our inaugural weekly brief is in development. Register below to receive our first issue directly to your inbox on release — and be first to access early-signal coverage across AI, biotech, defence tech, and frontier sectors.</p>
+    </div>
+    <div class="flex gap-3 w-full sm:w-auto shrink-0">
+      <input type="email" placeholder="your@email.com" class="field flex-1 sm:w-56">
+      <button class="btn-gold px-5 py-2 shrink-0">Notify Me</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE: ADVISORY
+══════════════════════════════════════════════ -->
+<div x-show="page === 'advisory'" x-cloak>
+
+  <!-- Header -->
+  <div class="bg-navy py-20">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8">
+      <p class="section-label mb-4">Premium Services</p>
+      <h2 class="text-white text-4xl max-w-2xl leading-tight mb-5">Rapid-response intelligence tailored to your specific questions</h2>
+      <p class="text-gray-400 text-[.92rem] font-light max-w-xl leading-relaxed">
+        Beyond the weekly brief, Kennet Global offers a premium tier of bespoke, confidential briefings for founders, investors, and operators with specific strategic or investment questions that can't wait.
+      </p>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-20">
+
+    <div class="grid md:grid-cols-2 gap-6 mb-16">
+
+      <div class="card p-8 border-l-4 border-gold">
+        <p class="text-gold text-[.68rem] font-bold uppercase tracking-widest mb-3">Tailored Briefings</p>
+        <p class="text-gray-600 text-[.88rem] leading-relaxed mb-4">Rapid-response, tailored briefings that answer your specific strategic or investment questions — opinionated, focused, and built entirely around your agenda.</p>
+        <ul class="space-y-2 text-[.8rem] text-gray-500">
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Specific technology sector deep-dives.</li>
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Investment thesis stress-testing.</li>
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Rapid turnaround on time-sensitive questions.</li>
+        </ul>
+      </div>
+
+      <div class="card p-8 border-l-4 border-gold">
+        <p class="text-gold text-[.68rem] font-bold uppercase tracking-widest mb-3">Opportunity & Mispricing Analysis</p>
+        <p class="text-gray-600 text-[.88rem] leading-relaxed mb-4">Focused analysis on where value is forming ahead of the market — identifying second-order effects, overlooked angles, and bottlenecks before consensus catches up.</p>
+        <ul class="space-y-2 text-[.8rem] text-gray-500">
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Emerging technology landscape mapping</li>
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Sector-specific mispricing identification</li>
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Bottleneck and dependency analysis</li>
+        </ul>
+      </div>
+
+      <div class="card p-8 border-l-4 border-gold">
+        <p class="text-gold text-[.68rem] font-bold uppercase tracking-widest mb-3">Intelligence Retainer</p>
+        <p class="text-gray-600 text-[.88rem] leading-relaxed mb-4">A standing arrangement for founders, investors, and operators who need expert judgment on demand — guaranteed response within the hour, for whenever a decision can't wait for a report.</p>
+        <ul class="space-y-2 text-[.8rem] text-gray-500">
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Direct calls and rapid written responses on your timeline.</li>
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Priority access for live questions and fast-moving situations.</li>
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Support for as long as is needed.</li>
+        </ul>
+      </div>
+
+      <div class="card p-8 border-l-4 border-gold">
+        <p class="text-gold text-[.68rem] font-bold uppercase tracking-widest mb-3">Keynotes & Addresses</p>
+        <p class="text-gray-600 text-[.88rem] leading-relaxed mb-4">In-person and remote presentations for leadership teams, boards, and conferences — delivering sharp, credible intelligence on the technology trends reshaping industries and investment landscapes.</p>
+        <ul class="space-y-2 text-[.8rem] text-gray-500">
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Custom keynotes on AI, defence tech, and frontier sectors.</li>
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Board and leadership team technology briefings.</li>
+          <li class="flex gap-2"><span class="tl-dot mt-[6px]"></span>Conference and investor summit presentations.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="bg-[#f0ede6] border border-[#e0dbd0] p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div>
+        <p class="text-navy font-semibold text-lg serif mb-1">Enquire about a bespoke briefing</p>
+        <p class="text-gray-500 text-[.85rem]">All premium enquiries are handled with full confidentiality.</p>
+      </div>
+      <button @click="page='contact'" class="btn-gold px-8 py-3 shrink-0">Get in Touch</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE: MEDIA
+══════════════════════════════════════════════ -->
+<div x-show="page === 'media'" x-cloak class="max-w-7xl mx-auto px-5 sm:px-8 py-20">
+
+  <p class="section-label mb-4">Events & Press</p>
+  <h2 class="text-3xl text-navy mb-12">Media & Engagements</h2>
+
+  <!-- Upcoming events - forthcoming -->
+  <div class="mb-16">
+    <span class="accent-bar"></span>
+    <h3 class="text-xl text-navy mb-6">Upcoming Events</h3>
+
+    <div class="bg-[#f0ede6] border border-[#e0dbd0] p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div>
+        <p class="text-navy font-semibold serif text-lg mb-1">Events launching soon</p>
+        <p class="text-gray-500 text-[.85rem] leading-relaxed max-w-xl">Kennet Global will be hosting webinars, roundtables, and public lectures on emerging technology, frontier sectors, and the investment and strategic implications of technological change. Register your interest to be notified when our events programme opens.</p>
+      </div>
+      <button @click="page='contact'" class="btn-gold px-8 py-3 shrink-0">Register Interest</button>
+    </div>
+  </div>
+
+  <!-- Press contact -->
+  <div class="border-t border-[#e0dbd0] pt-12">
+    <h3 class="text-xl text-navy mb-6">Press & Media</h3>
+    <p class="text-gray-500 text-[.88rem] leading-relaxed max-w-2xl mb-8">Kennet Global welcomes enquiries from journalists, editors, and broadcast producers seeking expert commentary on emerging technology, AI, or defence tech.</p>
+    <div class="bg-[#f0ede6] border border-[#e0dbd0] p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <p class="text-navy font-semibold serif mb-1">Press Enquiries</p>
+        <p class="text-gray-500 text-[.83rem]">For interview requests, expert commentary, or media partnerships.</p>
+      </div>
+      <a href="mailto:press@kennetglobal.com" class="text-gold font-semibold text-[.82rem] hover:underline shrink-0">press@kennetglobal.com →</a>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE: CONTACT
+══════════════════════════════════════════════ -->
+<div x-show="page === 'contact'" x-cloak class="max-w-6xl mx-auto px-5 sm:px-8 py-20">
+
+  <p class="section-label mb-4">Get in Touch</p>
+  <h2 class="text-3xl text-navy mb-12">Contact & Careers</h2>
+
+  <div class="grid md:grid-cols-5 gap-16">
+
+    <!-- Left -->
+    <div class="md:col-span-2 space-y-10">
+      <div>
+        <p class="text-[.68rem] font-bold uppercase tracking-widest text-navy mb-2">General Inquiries</p>
+        <a href="mailto:contact@kennetglobal.com" class="text-gold text-[.88rem] hover:underline">contact@kennetglobal.com</a>
+      </div>
+      <div>
+        <p class="text-[.68rem] font-bold uppercase tracking-widest text-navy mb-2">Advisory Inquiries</p>
+        <a href="mailto:advisory@kennetglobal.com" class="text-gold text-[.88rem] hover:underline">advisory@kennetglobal.com</a>
+      </div>
+      <div>
+        <p class="text-[.68rem] font-bold uppercase tracking-widest text-navy mb-2">Press</p>
+        <a href="mailto:press@kennetglobal.com" class="text-gold text-[.88rem] hover:underline">press@kennetglobal.com</a>
+      </div>
+      <div class="border-t border-[#e0dbd0] pt-8">
+        <p class="text-[.68rem] font-bold uppercase tracking-widest text-navy mb-3">Careers</p>
+        <p class="text-gray-500 text-[.85rem] leading-relaxed mb-4">Kennet Global seeks exceptional minds in emerging technology analysis, AI, biotech, defence tech, and investment intelligence. We are building our team and welcome enquiries from outstanding candidates at all levels, including interns and work experience.</p>
+        <p class="text-gray-500 text-[.82rem]">Send a message below with your background and areas of interest.</p>
+      </div>
+      <!-- Open roles -->
+      <div class="space-y-3">
+        <div class="border border-[#e0dbd0] p-5 bg-[#f9f8f5]">
+          <p class="text-navy text-[.82rem] italic text-gray-500">No roles are currently advertised. We welcome speculative applications. Please use the form to introduce yourself.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div class="md:col-span-3 bg-white p-8 border border-[#e8e4db]">
+      <p class="text-navy font-semibold serif text-lg mb-6">Send a message</p>
+      <div class="space-y-6">
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-[.65rem] uppercase font-semibold tracking-widest text-gray-400 mb-2">Full Name</label>
+            <input type="text" class="field">
+          </div>
+          <div>
+            <label class="block text-[.65rem] uppercase font-semibold tracking-widest text-gray-400 mb-2">Organisation</label>
+            <input type="text" class="field">
+          </div>
+        </div>
+        <div>
+          <label class="block text-[.65rem] uppercase font-semibold tracking-widest text-gray-400 mb-2">Email Address</label>
+          <input type="email" class="field">
+        </div>
+        <div>
+          <label class="block text-[.65rem] uppercase font-semibold tracking-widest text-gray-400 mb-2">Inquiry Type</label>
+          <select class="field">
+            <option value="">Select...</option>
+            <option>Advisory Services</option>
+            <option>Weekly Brief Collaboration</option>
+            <option>Press Inquiry</option>
+            <option>Career Application</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[.65rem] uppercase font-semibold tracking-widest text-gray-400 mb-2">Message</label>
+          <textarea rows="5" class="field resize-none"></textarea>
+        </div>
+        <button type="button" class="btn-gold w-full py-3">Send Message</button>
+        <p class="text-[.68rem] text-gray-400 text-center">All communications are treated in strict confidence.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ─────────── FOOTER ─────────── -->
+<footer class="bg-navy border-t border-gold/20 mt-auto">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 pt-14 pb-10 grid md:grid-cols-4 gap-10">
+    <div class="md:col-span-2">
+      <div class="flex items-center space-x-3 mb-4">
+        <div class="w-8 h-8 border border-gold flex items-center justify-center text-gold font-bold serif">K</div>
+        <span class="text-white text-sm font-semibold uppercase tracking-wider">Kennet Global</span>
+      </div>
+      <p class="text-gray-500 text-[.8rem] max-w-xs leading-relaxed">Emerging technology intelligence you can trust.</p>
+    </div>
+    <div>
+      <p class="text-gold text-[.63rem] font-bold uppercase tracking-widest mb-4">Navigate</p>
+      <ul class="space-y-2.5 text-[.8rem] text-gray-400">
+        <li><button @click="page='Weekly Brief'" class="hover:text-gold transition-colors">Weekly Brief Library</button></li>
+        <li><button @click="page='advisory'" class="hover:text-gold transition-colors">Advisory Services</button></li>
+        <li><button @click="page='media'"    class="hover:text-gold transition-colors">Events & Press</button></li>
+        <li><button @click="page='contact'"  class="hover:text-gold transition-colors">Careers</button></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-gold text-[.63rem] font-bold uppercase tracking-widest mb-4">Legal</p>
+      <ul class="space-y-2.5 text-[.8rem] text-gray-400">
+        <li><a href="#" class="hover:text-gold transition-colors">Privacy Policy</a></li>
+        <li><a href="#" class="hover:text-gold transition-colors">Ethics Statement</a></li>
+        <li><a href="#" class="hover:text-gold transition-colors">Transparency Report</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-6 border-t border-white/5 text-center text-[.65rem] text-gray-600 uppercase tracking-[.18em]">
+    &copy; 2026 Kennet Global &mdash; All Rights Reserved
+  </div>
+</footer>
+
+</body>
+</html>
